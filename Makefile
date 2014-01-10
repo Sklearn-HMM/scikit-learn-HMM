@@ -21,22 +21,22 @@ inplace:
 	$(PYTHON) setup.py build_ext -i
 
 test-code: in
-	$(NOSETESTS) -s -v sklearn
+	$(NOSETESTS) -s -v sklearn-hmm
 test-doc:
 	$(NOSETESTS) -s -v doc/ doc/modules/ doc/datasets/ \
 	doc/developers doc/tutorial/basic doc/tutorial/statistical_inference
 
 test-coverage:
 	rm -rf coverage .coverage
-	$(NOSETESTS) -s -v --with-coverage sklearn
+	$(NOSETESTS) -s -v --with-coverage sklearn-hmm
 
 test: test-code test-doc
 
 trailing-spaces:
-	find sklearn -name "*.py" | xargs perl -pi -e 's/[ \t]*$$//'
+	find sklearn-hmm -name "*.py" | xargs perl -pi -e 's/[ \t]*$$//'
 
 cython:
-	find sklearn -name "*.pyx" | xargs $(CYTHON)
+	find sklearn-hmm -name "*.pyx" | xargs $(CYTHON)
 
 ctags:
 	# make tags for symbol based navigation in emacs and vim
@@ -50,5 +50,5 @@ doc-noplot: inplace
 	$(MAKE) -C doc html-noplot
 
 code-analysis:
-	flake8 sklearn | grep -v __init__ | grep -v external
-	pylint -E -i y sklearn/ -d E1103,E0611,E1101
+	flake8 sklearn-hmm | grep -v __init__ | grep -v external
+	pylint -E -i y sklearn-hmm/ -d E1103,E0611,E1101

@@ -3,7 +3,7 @@
 # Copyright (C) 2007-2009 Cournapeau David <cournape@gmail.com>
 #               2010 Fabian Pedregosa <fabian.pedregosa@inria.fr>
 
-descr = """A set of python modules for machine learning and data mining"""
+descr = """The scikit-learn HMM (Hidden Markov Models) python modules"""
 
 import sys
 import os
@@ -20,20 +20,17 @@ else:
 # avoid attempting to load components that aren't built yet.
 builtins.__SKLEARN_SETUP__ = True
 
-DISTNAME = 'scikit-learn'
-DESCRIPTION = 'A set of python modules for machine learning and data mining'
+DISTNAME = 'scikit-learn-hmm'
+DESCRIPTION = 'The scikit-learn HMM (Hidden Markov Models) python modules'
 LONG_DESCRIPTION = open('README.rst').read()
 MAINTAINER = 'Andreas Mueller'
 MAINTAINER_EMAIL = 'amueller@ais.uni-bonn.de'
 URL = 'http://scikit-learn.org'
 LICENSE = 'new BSD'
 DOWNLOAD_URL = 'http://sourceforge.net/projects/scikit-learn/files/'
-
-# We can actually import a restricted version of sklearn that
-# does not need the compiled code
-import sklearn
-
-VERSION = sklearn.__version__
+VERSION = '0.15' #The scikit-learn version that the HMM's were initially
+                 #copied from - can be adjusted later depending on the
+                 #outcome of this repository as needed.
 
 ###############################################################################
 # Optional setuptools features
@@ -63,7 +60,7 @@ class CleanCommand(Clean):
         Clean.run(self)
         if os.path.exists('build'):
             shutil.rmtree('build')
-        for dirpath, dirnames, filenames in os.walk('sklearn'):
+        for dirpath, dirnames, filenames in os.walk('sklearn-hmm'):
             for filename in filenames:
                 if (filename.endswith('.so') or filename.endswith('.pyd')
                              or filename.endswith('.dll')
@@ -87,7 +84,7 @@ def configuration(parent_package='', top_path=None):
                        delegate_options_to_subpackages=True,
                        quiet=True)
 
-    config.add_subpackage('sklearn')
+    config.add_subpackage('sklearn-hmm')
 
     return config
 
